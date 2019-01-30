@@ -1,0 +1,17 @@
+ip: 130.131.132.133
+memory: 2048
+cpus: 1
+provider: virtualbox
+authorize: ~/.ssh/id_rsa.pub
+keys:
+- ~/.ssh/id_rsa
+folders:
+- map: .
+  to: /home/vagrant/code
+sites:
+- map: basicFunc.com
+  to: /home/vagrant/code/public
+databases:
+- homestead
+name: basicFunc.com
+hostname: basicFunc.com
