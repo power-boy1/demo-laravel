@@ -1,0 +1,66 @@
+.sidebar {
+  width: $sidebar-width;
+  position: relative;
+  z-index: 9;
+  box-shadow: 0 0 17px .7px rgba(0,0,0,.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  &.el-menu {
+    flex: 1 1 auto;
+    padding: 20px 0;
+    border-right: none;
+  }
+}
+
+.menu-item {
+  .menu & {
+    padding: 0 !important;
+    color: inherit;
+    font-size: 16px;
+    &:hover:not(.is-active) {
+      color: $text-highlight;
+      background-color: transparent;
+    }
+    &.is-active {
+      background-color: $text-highlight;
+      color: #fff;
+      cursor: default;
+    }
+  }
+}
+
+.menu-link {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  .is-active & {
+    cursor: default;
+  }
+}
+
+.menu-back {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  color: $white;
+  background-color: $bg-primary;
+  transition: .3s ease;
+  &:hover:not(.is-active) {
+    background-color: $bg-highlight;
+    color: $text-highlight;
+  }
+}
+.menu-back-icon {
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 20px;
+  vertical-align: middle;
+  font-weight: bold;
+}

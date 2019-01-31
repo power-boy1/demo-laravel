@@ -1,0 +1,52 @@
+//colors
+$white: #fff;
+$black: #222;
+$red: #e74646;
+$orange: #d89757;
+$grey: #3c3c3c;
+$grey-light: #a0a0a0;
+$yellow: #eac95d;
+
+//fonts
+$main-font: 'nudista-web', sans-serif;
+$sub-font: 'Roboto-Mono', 'Roboto', sans-serif;
+$font-size: 14px;
+
+
+// breakpoint
+$breakpoint-xs-min: 320px;
+$breakpoint-sm-min: 768px;
+$breakpoint-md-min: 980px;
+$breakpoint-rg-min: 1200px;
+$breakpoint-lg-min: 1562px;
+$breakpoint-xl-min: 1680px;
+
+$breakpoint-xs-max: $breakpoint-sm-min - 1px;
+$breakpoint-sm-max: $breakpoint-md-min - 1px;
+$breakpoint-md-max: $breakpoint-rg-min - 1px;
+$breakpoint-rg-max: $breakpoint-lg-min - 1px;
+$breakpoint-lg-max: $breakpoint-xl-min - 1px;
+$breakpoint-xl-max: 1920px;
+
+//widths
+$containerWidth: 1030px;
+$col-count: 12;
+
+// Animation
+$transition-speed: 0.3s !default;
+
+// iframe offset
+
+//mobile
+$videoFrameMobile: 5px;
+$videoFrameMobileHorizontal: $videoFrameMobile - 2px;
+$videoFrameMobileVertical: $videoFrameMobile - 1px;
+$videoClientWidthMobile:  $videoFrameMobileHorizontal * 2;
+$videoClientHeightMobile: $videoFrameMobileVertical * 2;
+
+//desktop
+$videoFrame: 10px;
+$videoFrameHorizontal: $videoFrame - 2px;
+$videoFrameVertical: $videoFrame - 1px;
+$videoClientWidth: $videoFrameHorizontal * 2;
+$videoClientHeight: $videoFrameVertical * 2;

@@ -1,14 +1,17 @@
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
-@import 'variables';
+@import "variables";
+@import "variables/variables";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Base
+@import "main";
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+// Styles
+@import "management/general";
+@import "management/management";
+
+// Components styles
+@import "management/components/header";
+@import "management/components/footer";
+@import "management/components/sidebar";
+@import "management/components/list";
+@import "management/components/modalConfirm";

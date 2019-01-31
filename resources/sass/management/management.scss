@@ -1,0 +1,62 @@
+.management_header_label {
+  font-size: 22px;
+}
+
+.management_header_auth {
+  text-align: right;
+  font-size: 14px;
+}
+
+.management_list_header {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.management_label {
+  margin: auto;
+  font-size: 25px;
+}
+
+.management_create_form {
+  width: 60%;
+  margin: auto;
+}
+
+.el-date-editor--datetimerange.management_datetime_range_field,
+.el-date-editor--datetimerange.el-input__inner.management_datetime_range_field {
+  width: 100%;
+}
+
+.management-image {
+  width: 150px;
+  height: 150px;
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -10px 20px;
+}
+
+.management-title {
+  padding: 10px;
+  margin: 0;
+}
+
+.management-controls {
+  display : flex;
+  padding: 10px;
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.form-error {
+  font-size: 10px;
+  font-family: $sub-font;
+  color: $red;
+  text-transform: uppercase;
+  left: 0;
+}
