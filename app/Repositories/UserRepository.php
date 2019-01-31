@@ -44,15 +44,11 @@ class UserRepository
 
     public function list(Request $request)
     {
-        $role = Role::where('name', Role::SUPER_ADMIN)->first();
-
-        $query = User::select(['*']);
+        $role = Role::where('name', Role::SUPER_ADMIN)->first(['id']);
 
         $sort = $request->get('desc') ?: 'asc';
         $key = $request->get('orderBy') ?: 'id';
-        $query->orderBy($key, $sort);
-        $query->where('role_id', '!=', $role->id);
 
-        return $query;
+        return User::orderBy($key, $sort)->where('role_id', '!=', $role->id);
     }
 }

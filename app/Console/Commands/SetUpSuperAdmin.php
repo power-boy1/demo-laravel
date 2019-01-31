@@ -23,16 +23,6 @@ class SetUpSuperAdmin extends Command
     protected $description = 'Setup super admin in system';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed

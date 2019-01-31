@@ -13,7 +13,7 @@ class RoleService
      * @param $roleId
      * @return bool
      */
-    public function isAdmin($roleId)
+    public function isAdmin($roleId): bool
     {
         $role = Role::select('name')
             ->where('id', $roleId)
@@ -32,7 +32,7 @@ class RoleService
      * @param $roleId
      * @return bool
      */
-    public function isSuperAdmin($roleId)
+    public function isSuperAdmin($roleId): bool
     {
         $role = Role::select('name')
             ->where('id', $roleId)

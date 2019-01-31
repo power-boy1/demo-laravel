@@ -16,7 +16,7 @@ class UserActionService
      *
      * @return UserAction
      */
-    public function create(User $user, string $token, string $action)
+    public function create(User $user, string $token, string $action): UserAction
     {
         $userAction = UserAction::make(['token' => $token, 'action' => $action]);
 
