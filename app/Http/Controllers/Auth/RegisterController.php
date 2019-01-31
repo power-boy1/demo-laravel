@@ -2,71 +2,71 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
+use App\Jobs\SendAfterRegistration;
+use App\Models\Auth\UserAction;
+use App\Repositories\UserActionRepository;
+use App\Services\UserActionService;
+use App\Services\UserService;
+use App\Utils\TokenGenerator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    protected $userService;
+    protected $userActionService;
+    protected $userActionRepository;
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public function __construct(
+        UserService $userService,
+        UserActionService $userActionService,
+        UserActionRepository $userActionRepository
+    ) {
+        $this->userService = $userService;
+        $this->userActionService = $userActionService;
+        $this->userActionRepository = $userActionRepository;
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function registerPage()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+        return view('auth.register');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    public function register(RegisterRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $data = [
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password'))
+        ];
+
+        $user = $this->userService->registration($data);
+
+        $token = TokenGenerator::generate();
+
+        $this->userActionService->create($user, $token, UserAction::ACTIVATE_ACCOUNT);
+
+        $this->dispatch(new SendAfterRegistration(
+            $request->input('email'),
+            route('get.auth.accountVerify', ['token' => $token])
+        ));
+
+        session()->flash('status', 'Success registration. Now, check your email please.');
+        return view('home');
+    }
+
+    public function accountVerify($token)
+    {
+        $userAction = $this->userActionRepository->getByToken($token);
+
+        if (!$userAction) {
+            abort(404);
+        }
+
+        $userAction->delete();
+
+        session()->flash('status', 'Success confirm account.');
+        return redirect('/home');
     }
 }
