@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', [
+    'as' => 'get.home',
+    'uses' => function () {
+        return view('home');
+    }
+]);
