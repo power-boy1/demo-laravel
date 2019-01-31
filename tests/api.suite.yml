@@ -1,0 +1,12 @@
+actor: ApiTester
+modules:
+  enabled:
+    - Asserts
+    - Laravel5:
+        environment_file: .env.testing
+        cleanup: true
+        run_database_migrations: true
+    - \Helper\Api
+    - REST:
+        url: /api
+        depends: Laravel5
