@@ -13,9 +13,9 @@ cp -v "./provision/docker/.env.example" ./.env
 cp -v "./provision/docker/.env.testing.example" ./.env.testing
 
 # Changing laradock env-example file and copy him to env
-sed -i "s/MYSQL_DATABASE=default/MYSQL_DATABASE=jesus_culture_db/" ./laradock/env-example
-sed -i "s/MYSQL_USER=default/MYSQL_USER=jesus_culture/" ./laradock/env-example
-sed -i "s/COMPOSE_PROJECT_NAME=laradock/COMPOSE_PROJECT_NAME=jesus-culture/" ./laradock/env-example
+sed -i "s/MYSQL_DATABASE=default/MYSQL_DATABASE=basic_func_db/" ./laradock/env-example
+sed -i "s/MYSQL_USER=default/MYSQL_USER=basic_func/" ./laradock/env-example
+sed -i "s/COMPOSE_PROJECT_NAME=laradock/COMPOSE_PROJECT_NAME=basic_func/" ./laradock/env-example
 cp laradock/env-example laradock/.env
 
 # Adding config for fix the problem with auth method in MySQL v8.*
@@ -31,14 +31,14 @@ docker-compose exec workspace composer install
 # Create main DB and for testing
 # Create an users and giving them privileges to DBs
 docker-compose exec mysql mysql --execute="
-CREATE DATABASE IF NOT EXISTS jesus_culture_db COLLATE utf8_general_ci;
-CREATE DATABASE IF NOT EXISTS jesus_culture_db_test COLLATE utf8_general_ci;
-CREATE USER 'jesus_culture'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
-GRANT ALL PRIVILEGES ON jesus_culture_db.* TO 'jesus_culture'@'localhost' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON jesus_culture_db_test.* TO 'jesus_culture'@'localhost' WITH GRANT OPTION;
-CREATE USER 'jesus_culture'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
-GRANT ALL PRIVILEGES ON jesus_culture_db.* TO 'jesus_culture'@'%' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON jesus_culture_db_test.* TO 'jesus_culture'@'%' WITH GRANT OPTION;
+CREATE DATABASE IF NOT EXISTS basic_func_db COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS basic_func_db_test COLLATE utf8_general_ci;
+CREATE USER 'basic_func'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
+GRANT ALL PRIVILEGES ON basic_func_db.* TO 'basic_func'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON basic_func_db_test.* TO 'basic_func'@'localhost' WITH GRANT OPTION;
+CREATE USER 'basic_func'@'%' IDENTIFIED WITH mysql_native_password BY 'secret';
+GRANT ALL PRIVILEGES ON basic_func_db.* TO 'basic_func'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON basic_func_db_test.* TO 'basic_func'@'%' WITH GRANT OPTION;
 "
 
 # Clear configs

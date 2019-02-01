@@ -1,69 +1,104 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+[![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# About project
 
-## About Laravel
+Project with basic functional:
+ - authorization;
+ - registration;
+ - verify account by link (sending to email);
+ - recovery password by link (sending to email);
+ - simple ACL;
+ - management users (CRUD).
+ 
+Used next packages and dependencies:
+ - PHP : ^7.1.3;
+ - Laravel : 5.7.*;
+ - Vue : ^2.5.17;
+ - Vuex : ^3.0.1;
+ - Element-ui: ^2.4.11;
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Getting started
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Instruction how install project before using. 
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+### Setup project
 
-## Learning Laravel
+Clone this repository to your local machine:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+- git clone https://github.com/ShkrutDenis/demo-laravel.git
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+    > If your already have repository, you can add remote 
+    
+    > ``` git remote add https://github.com/ShkrutDenis/demo-laravel.git ```
 
-## Laravel Sponsors
+- git checkout -b develop
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+- git pull https://github.com/ShkrutDenis/demo-laravel.git develop
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+Next step you need to setup environment. You can select any environment between `vagrant` or `docker`.
 
-## Contributing
+#### Setup environment
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+##### vagrant (homestead):
 
-## Security Vulnerabilities
+> Project use homestead, because your need install VirtualBox v 5.*
+    
+1) First you need run next bash command:
+    ```
+        bash ./provision/vagrant/init.sh
+    ```
+    > Now you will must be in vagrant, your user will must be vagrant@basicFunc:~$ 
+    
+3) Run migrations and seeders:
+    ```
+        php artisan migrate
+        php artisan db:seed
+    ```
+    > This commands and any same must be run in vagrant machine
+    
+4) Run setup super admin:
+    ```
+        php artisan setup:super-admin
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5) Now you can get access to site in your browser by next link:
+    ```
+        http://130.131.132.133
+    ```
+    
+    > You can change path or any params in Homestead.yaml in root project directory
+    
+##### docker (laradock v7.8.0):
 
-## License
+1) Run next bash command:
+    ```
+        bash ./provosion/docker/docker-up-script.sh
+    ```
+    > Now you must be in "workspace" docker container
+    
+2) Change user from root to laradock:
+    ```
+        su - laradock
+        cd /var/www/
+    ``` 
+3) Now you can get access to site in your browser by next link:
+    ```
+       http://localhost
+    ```
+    
+### Testing
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> All command must be run on virtual machine (vagrant) or inside container (docker).
+
+For start tests run next command:
+```
+    php vendor/bin/codecept run
+```
+For check codestyle by codesniffer run next command:
+```
+    php vendor/bin/phpcs
+```
+For check code for copy-paste run next command:
+```
+    php vendor/bin/phpcpd app/
+```
