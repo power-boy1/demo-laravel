@@ -42,7 +42,7 @@ class PasswordController extends Controller
         $user = $this->userRepository->getByEmail($request->get('email'));
 
         if (!$user) {
-            return redirect()->back()->withErrors(['email' => 'Email not found']);
+            return redirect()->back()->withErrors(['email' => __('messages.email_not_found')]);
         }
 
         $token = TokenGenerator::generate();
@@ -55,7 +55,7 @@ class PasswordController extends Controller
             $user->name
         ));
 
-        session()->flash('status', 'Action for reset pass successful created. Now, check your email please.');
+        session()->flash('status', __('messages.success_recovery_password'));
         return view('home');
     }
 
@@ -75,14 +75,14 @@ class PasswordController extends Controller
         $userAction = $this->userActionRepository->getByToken($request->get('token'));
 
         if (!$userAction) {
-            return redirect()->back()->withErrors(['token' => 'Wrong token']);
+            return redirect()->back()->withErrors(['token' => __('messages.wrong_token')]);
         }
 
         $this->userService->changePassword($userAction->user_id, $request->get('password'));
 
         $userAction->delete();
 
-        session()->flash('status', 'Password successful changed');
+        session()->flash('status', __('messages.success_password_change'));
         return view('home');
     }
 }

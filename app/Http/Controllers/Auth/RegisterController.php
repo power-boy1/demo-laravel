@@ -52,7 +52,7 @@ class RegisterController extends Controller
             route('get.auth.accountVerify', ['token' => $token])
         ));
 
-        session()->flash('status', 'Success registration. Now, check your email please.');
+        session()->flash('status', __('messages.success_registration'));
         return view('home');
     }
 
@@ -66,7 +66,7 @@ class RegisterController extends Controller
 
         $userAction->delete();
 
-        session()->flash('status', 'Success confirm account.');
+        session()->flash('status', __('messages.success_confirm_account'));
         return redirect('/home');
     }
 }

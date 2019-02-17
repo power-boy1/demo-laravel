@@ -30,18 +30,18 @@ class LoginController extends Controller
         $user = $this->userRepository->getByEmail($request->get('email'));
 
         if (!$user || !Hash::check($request->get('password'), $user->password)) {
-            return redirect()->back()->withErrors(['email' => 'Wrong email or password']);
+            return redirect()->back()->withErrors(['email' => __('messages.wrong_credentials')]);
         }
 
         $userActions = $this->userActionRepository->getActivateAccountAction($user->id);
 
         if ($userActions) {
-            return redirect()->back()->withErrors(['email' => 'Please, first verify your account']);
+            return redirect()->back()->withErrors(['email' => __('not_verified_account')]);
         }
 
         Auth::LoginUsingId($user->id);
 
-        session()->flash('status', 'Welcome ' . $user->name);
+        session()->flash('status', __('messages.welcome', ['name' => $user->name]));
         return view('home');
     }
 
@@ -51,7 +51,7 @@ class LoginController extends Controller
 
         Auth::logout();
 
-        session()->flash('status', 'Bye ' . $user->name);
+        session()->flash('status', __('messages.bye', ['name' => $user->name]));
         return redirect('/');
     }
 }
