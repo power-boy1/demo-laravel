@@ -1,0 +1,41 @@
+language: php
+php:
+  - 7.1
+  #- 7.2
+  #- 7.3
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+
+dist: trusty
+
+sudo: required
+
+install:
+  # Composer
+  - composer self-update
+  - composer install -n --prefer-source
+  # Database
+  - mysql -e 'CREATE DATABASE homestead_test;'
+before_script:
+  # Directories
+  - chmod a+w ./tests/_output
+  - cp -i provision/.env.travis .env.testing
+  - php artisan migrate --env=testing
+  - php artisan db:seed --env=testing
+script:
+  # Check code style
+  - php vendor/bin/phpcs
+  # Run CodeCeption tests
+  - php vendor/bin/codecept build
+  - php vendor/bin/codecept run --coverage --coverage-xml
+after_success:
+  # Upload coverage report
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml

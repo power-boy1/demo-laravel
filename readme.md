@@ -1,6 +1,10 @@
 [![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
 
-# About project
+[![Build Status](https://img.shields.io/travis/ShkrutDenis/demo-laravel/master.svg?style=flat)](https://travis-ci.org/ShkrutDenis/demo-laravel.svg?branch=master)
+
+[![Coverage Status](https://coveralls.io/repos/github/ShkrutDenis/demo-laravel/badge.svg?branch=master)](https://coveralls.io/github/ShkrutDenis/demo-laravel?branch=master)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/?branch=master)
 
 Project with basic functional:
  - authorization;
