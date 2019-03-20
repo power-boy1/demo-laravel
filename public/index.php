@@ -7,6 +7,8 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+include '../c3.php';
+
 define('LARAVEL_START', microtime(true));
 
 /*
