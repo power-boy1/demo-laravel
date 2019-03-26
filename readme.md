@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/ShkrutDenis/demo-laravel/master.svg?style=flat)](https://travis-ci.org/ShkrutDenis/demo-laravel.svg?branch=master)
 
-[![Coverage Status](https://coveralls.io/repos/github/ShkrutDenis/demo-laravel/badge.svg?branch=master)](https://coveralls.io/github/ShkrutDenis/demo-laravel?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/ShkrutDenis/demo-laravel/master.svg?style=flat)](https://coveralls.io/r/ShkrutDenis/demo-laravel?branch=master)
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/?branch=master)
 
