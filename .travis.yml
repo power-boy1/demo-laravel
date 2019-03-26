@@ -25,6 +25,7 @@ install:
   - mysql -e 'CREATE DATABASE homestead_test;'
 before_script:
   # Directories
+  - mkdir .reports
   - chmod a+w ./tests/_output
   - cp -i provision/.env.travis .env.testing
   - php artisan migrate --env=testing
@@ -37,5 +38,6 @@ script:
   - php vendor/bin/codecept run --coverage --coverage-xml
 after_success:
   # Upload coverage report
+  - php vendor/bin/php-coveralls -v
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml
