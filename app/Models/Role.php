@@ -17,6 +17,8 @@ use Illuminate\Support\Carbon;
  */
 class Role extends \Eloquent
 {
+    const PAGINATE_PER_PAGE = 30;
+
     const USER = 'user';
     const ADMIN = 'admin';
     const SUPER_ADMIN = 'superAdmin';
@@ -31,5 +33,15 @@ class Role extends \Eloquent
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('m/d/Y h:i:s A') : $date;
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return $date ? Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('m/d/Y h:i:s A') : $date;
     }
 }
