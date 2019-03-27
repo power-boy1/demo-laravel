@@ -3,6 +3,9 @@
         case 'management/users':
             $tabIndex = 1;
             break;
+        case 'management/roles':
+            $tabIndex = 2;
+            break;
         default:
             $tabIndex = 1;
             break;
@@ -16,6 +19,12 @@
             <a class="menu-link" href="{{ route('get.manage.user.show') }}">
                 <i class="el-icon-menu"></i>
                 <span>Users</span>
+            </a>
+        </el-menu-item>
+        <el-menu-item index="2" class="menu-item">
+            <a class="menu-link" href="{{ route('get.manage.role.show') }}">
+                <i class="el-icon-menu"></i>
+                <span>Roles</span>
             </a>
         </el-menu-item>
     </el-menu>
