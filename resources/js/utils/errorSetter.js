@@ -2,7 +2,8 @@ export function setterErrorsFromFormFields(errors)
 {
     let errorFields = {
         name: '',
-        email: ''
+        email: '',
+        description: ''
     };
 
     const fields = {};

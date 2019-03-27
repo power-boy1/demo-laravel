@@ -2,9 +2,8 @@
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
-class FuncManagementUserCest
+class FuncManagementRoleCest
 {
     public function _before(FunctionalTester $I)
     {
@@ -21,43 +20,43 @@ class FuncManagementUserCest
 
     public function listPage(FunctionalTester $I)
     {
-        $I->amOnPage(route('get.manage.user.show'));
-        $I->see('Users list');
+        $I->amOnPage(route('get.manage.role.show'));
+        $I->see('Roles list');
     }
 
     public function listPageFail(FunctionalTester $I)
     {
         Auth::logout();
 
-        $I->amOnPage(route('get.manage.user.show'));
+        $I->amOnPage(route('get.manage.role.show'));
         $I->seeResponseCodeIs(403);
     }
 
     public function detailsPage(FunctionalTester $I)
     {
-        $user = factory(User::class)->create();
+        $role = factory(Role::class)->create();
 
-        $I->amOnPage(route('get.manage.user.details', ['id' => $user->id]));
-        $I->see('User details');
+        $I->amOnPage(route('get.manage.role.details', ['id' => $role->id]));
+        $I->see('Role details');
     }
 
     public function createPage(FunctionalTester $I)
     {
-        $I->amOnPage(route('get.manage.user.create'));
-        $I->see('Create user');
+        $I->amOnPage(route('get.manage.role.create'));
+        $I->see('Create role');
     }
 
     public function editPage(FunctionalTester $I)
     {
-        $user = factory(User::class)->create();
+        $role = factory(Role::class)->create();
 
-        $I->amOnPage(route('get.manage.user.edit', ['id' => $user->id]));
-        $I->see('Edit user');
+        $I->amOnPage(route('get.manage.role.edit', ['id' => $role->id]));
+        $I->see('Edit role');
     }
 
     public function editPageFail(FunctionalTester $I)
     {
-        $I->amOnPage(route('get.manage.user.edit', ['id' => 1]));
+        $I->amOnPage(route('get.manage.role.edit', ['id' => 0]));
         $I->seePageNotFound();
     }
 }

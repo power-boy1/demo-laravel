@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Management;
+namespace App\Http\Requests\Management\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,6 +26,7 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'email', 'max:50', 'unique:users'],
+            'role' => ['required', 'integer', 'min:1'],
             'password' => ['required', 'string', 'min:5', 'max:64']
         ];
     }
@@ -34,6 +35,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'password.required' => 'THE PASSWORD FIELD IS REQUIRED',
+            'role.required' => 'THE ROLE FIELD IS REQUIRED',
             'email.email' => 'PLEASE ENTER A VALID EMAIL ADDRESS',
             'email.required' => 'THE EMAIL FIELD IS REQUIRED',
             'email.max' => 'PLEASE ENTER EMAIL OF LESS THAN 50 CHARACTERS',

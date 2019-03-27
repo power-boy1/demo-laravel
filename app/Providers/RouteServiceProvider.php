@@ -63,6 +63,11 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace . '\Management')
             ->prefix('management')
             ->group(base_path('routes/management/user.php'));
+
+        Route::middleware('web')
+            ->namespace($this->namespace . '\Management')
+            ->prefix('management')
+            ->group(base_path('routes/management/role.php'));
     }
 
     /**
@@ -83,5 +88,10 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace . '\Api\Management')
             ->group(base_path('routes/api/management/user.php'));
+
+        Route::prefix('api')
+            ->middleware('web')
+            ->namespace($this->namespace . '\Api\Management')
+            ->group(base_path('routes/api/management/role.php'));
     }
 }

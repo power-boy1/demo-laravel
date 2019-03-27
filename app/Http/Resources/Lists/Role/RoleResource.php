@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Lists;
+namespace App\Http\Resources\Lists\Role;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class RoleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,12 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
+            'description' => $this->description,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
-            'linkDetails' => route('get.manage.user.details', ['id' => $this->id]),
-            'linkEdit' => route('get.manage.user.edit', ['id' => $this->id]),
-            'linkDelete' => route('delete.manage.user.delete', ['id' => $this->id])
+            'linkDetails' => route('get.manage.role.details', ['id' => $this->id]),
+            'linkEdit' => route('get.manage.role.edit', ['id' => $this->id]),
+            'linkDelete' => route('delete.manage.role.delete', ['id' => $this->id])
         ];
     }
 }

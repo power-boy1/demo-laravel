@@ -40,10 +40,6 @@ class SetUpSuperAdmin extends Command
 
                 $user->role()->associate($role);
                 $user->save();
-
-                if (!$user) {
-                    echo 'Error: can`t create new user!' . PHP_EOL;
-                }
             } else {
                 echo 'Error: role '. Role::SUPER_ADMIN . ' not found!' . PHP_EOL;
             }

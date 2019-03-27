@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
     /**
-     * Create new user
+     * Create new user with role user
      *
      * @param array $data
      * @return User
@@ -29,6 +29,25 @@ class UserService
     }
 
     /**
+     * Create new user
+     *
+     * @param array $data
+     * @return User
+     */
+    public function create(array $data): User
+    {
+        $user = User::make($data);
+
+        $role = Role::findOrFail($data['role']);
+
+        return tap($user, function (User $user) use ($role) {
+            $user->role()->associate($role);
+
+            $user->save();
+        });
+    }
+
+    /**
      * Update user
      *
      * @param array $data
@@ -37,10 +56,13 @@ class UserService
     public function update(array $data): User
     {
         $user = User::findOrFail($data['id']);
+        $role = Role::findOrFail($data['role']);
 
         $user->fill($data);
 
-        return tap($user, function (User $user) {
+        return tap($user, function (User $user) use ($role) {
+            $user->role()->associate($role);
+
             $user->save();
         });
     }

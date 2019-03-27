@@ -1,21 +1,20 @@
 @extends('layouts.admin')
-@section('title', 'Manage user')
+@section('title', 'Manage role')
 
 @section('content')
     <el-main>
         <div class="management-header">
             <h1 class="management-title">
-                Create user
+                Create role
             </h1>
         </div>
-        <user-create
-                route-back="{{ route('get.manage.user.show') }}"
+        <role-create
+                route-back="{{ route('get.manage.role.show') }}"
                 csrf_token="{{ csrf_token() }}"
-                action="{{ route('post.manage.user.create')}}"
-                roles-data="{{ json_encode($roles) }}"
+                action="{{ route('post.manage.role.create')}}"
                 old-data="{{ json_encode(old()) }}"
                 array-error-message="{{ $errors }}"
         >
-        </user-create>
+        </role-create>
     </el-main>
 @endsection

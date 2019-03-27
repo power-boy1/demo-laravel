@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Management;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Lists\PaginatorUserResource;
+use App\Http\Resources\Lists\User\PaginatorUserResource;
 use App\Http\Resources\Messages\ErrorResource;
 use App\Http\Resources\Messages\SuccessResource;
 use App\Models\User;
@@ -27,11 +27,11 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $categories = $this->userRepository->list($request);
+        $users = $this->userRepository->list($request);
 
-        $categories = $categories->paginate(User::PAGINATE_PER_PAGE);
+        $users = $users->paginate(User::PAGINATE_PER_PAGE);
 
-        return PaginatorUserResource::make($categories);
+        return PaginatorUserResource::make($users);
     }
 
     public function deleteUser($id)

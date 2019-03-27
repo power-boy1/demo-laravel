@@ -30,6 +30,10 @@ Vue.component('user-list', require('./components/management/user/List').default)
 Vue.component('user-create', require('./components/management/user/FormCreate').default);
 Vue.component('user-edit', require('./components/management/user/FormEdit').default);
 
+Vue.component('role-list', require('./components/management/role/List').default);
+Vue.component('role-create', require('./components/management/role/FormCreate').default);
+Vue.component('role-edit', require('./components/management/role/FormEdit').default);
+
 Vue.component('modal-confirm', require('./components/modules/modals/ModalConfirm').default);
 Vue.component('modal-confirm-delete', require('./components/modules/modals/ModalConfirmDelete').default);
 
