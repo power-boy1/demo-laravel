@@ -12,8 +12,8 @@
                 route-back="{{ route('get.manage.user.show') }}"
                 csrf_token="{{ csrf_token() }}"
                 action="{{ route('post.manage.user.update')}}"
-                method="post"
                 item-data="{{ $user }}"
+                roles-data="{{ json_encode($roles) }}"
                 old-data="{{ json_encode(old()) }}"
                 array-error-message="{{ $errors }}"
         >

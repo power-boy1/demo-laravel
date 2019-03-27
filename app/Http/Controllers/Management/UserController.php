@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Management\CreateUserRequest;
-use App\Http\Requests\Management\UpdateUserRequest;
+use App\Http\Requests\Management\User\CreateUserRequest;
+use App\Http\Requests\Management\User\UpdateUserRequest;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Services\UserService;
 use App\Utils\Messages\User\NotFoundMessage;
@@ -17,13 +18,27 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    protected $userService;
-    protected $userRepository;
+    /**
+     * @var UserService
+     */
+    private $userService;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    /**
+     * @var RoleRepository
+     */
+    private $roleRepository;
 
-    public function __construct(UserService $userService, UserRepository $userRepository)
-    {
+    public function __construct(
+        UserService $userService,
+        UserRepository $userRepository,
+        RoleRepository $roleRepository
+    ) {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     public function index()
@@ -33,7 +48,11 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('management.user.create');
+        $roles = $this->roleRepository->getAll();
+
+        return view('management.user.create', [
+            'roles' => $roles
+        ]);
     }
 
     public function details($id)
@@ -48,9 +67,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepository->getById($id);
+        $roles = $this->roleRepository->getAll();
 
         return view('management.user.edit', [
-            'user' => json_encode($user)
+            'user' => json_encode($user),
+            'roles' => $roles
         ]);
     }
 
@@ -59,7 +80,8 @@ class UserController extends Controller
         $data = [
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
+            'password' => Hash::make($request->get('password')),
+            'role' => $request->get('role')
         ];
 
         $this->userService->registration($data);
@@ -74,7 +96,8 @@ class UserController extends Controller
         $data = [
             'id' => $request->get('user_id'),
             'name' => $request->get('name'),
-            'email' => $request->get('email')
+            'email' => $request->get('email'),
+            'role' => $request->get('role')
         ];
 
         if ($request->get('password')) {
