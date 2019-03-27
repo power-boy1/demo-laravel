@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FuncManagementUserCest
 {
-    public function _before(ApiTester $I)
+    public function _before(FunctionalTester $I)
     {
         $role = Role::where('name', Role::SUPER_ADMIN)->first();
         $user = factory(User::class)->create(['role_id' => $role->id]);
@@ -14,7 +14,7 @@ class FuncManagementUserCest
         Auth::loginUsingId($user->id);
     }
 
-    public function _after(ApiTester $I)
+    public function _after(FunctionalTester $I)
     {
         Auth::logout();
     }
@@ -23,6 +23,14 @@ class FuncManagementUserCest
     {
         $I->amOnPage(route('get.manage.user.show'));
         $I->see('Users list');
+    }
+
+    public function detailsPage(FunctionalTester $I)
+    {
+        $user = factory(User::class)->create();
+
+        $I->amOnPage(route('get.manage.user.details', ['id' => $user->id]));
+        $I->see('User details');
     }
 
     public function createUserPage(FunctionalTester $I)

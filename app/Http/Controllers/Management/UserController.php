@@ -84,7 +84,7 @@ class UserController extends Controller
             'role' => $request->get('role')
         ];
 
-        $this->userService->registration($data);
+        $this->userService->create($data);
 
         SuccessCreateMessage::initFlashMessage();
 

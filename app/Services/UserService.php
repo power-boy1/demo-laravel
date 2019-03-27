@@ -10,12 +10,31 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
     /**
-     * Create new user
+     * Create new user with role user
      *
      * @param array $data
      * @return User
      */
     public function registration(array $data): User
+    {
+        $user = User::make($data);
+
+        $role = Role::where('name', '=', Role::USER)->first();
+
+        return tap($user, function (User $user) use ($role) {
+            $user->role()->associate($role);
+
+            $user->save();
+        });
+    }
+
+    /**
+     * Create new user
+     *
+     * @param array $data
+     * @return User
+     */
+    public function create(array $data): User
     {
         $user = User::make($data);
 
