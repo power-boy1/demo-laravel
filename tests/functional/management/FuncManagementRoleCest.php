@@ -24,6 +24,14 @@ class FuncManagementRoleCest
         $I->see('Roles list');
     }
 
+    public function listPageFail(FunctionalTester $I)
+    {
+        Auth::logout();
+
+        $I->amOnPage(route('get.manage.role.show'));
+        $I->seeResponseCodeIs(403);
+    }
+
     public function detailsPage(FunctionalTester $I)
     {
         $role = factory(Role::class)->create();

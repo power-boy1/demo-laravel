@@ -19,10 +19,18 @@ class FuncManagementUserCest
         Auth::logout();
     }
 
-    public function userListPage(FunctionalTester $I)
+    public function listPage(FunctionalTester $I)
     {
         $I->amOnPage(route('get.manage.user.show'));
         $I->see('Users list');
+    }
+
+    public function listPageFail(FunctionalTester $I)
+    {
+        Auth::logout();
+
+        $I->amOnPage(route('get.manage.user.show'));
+        $I->seeResponseCodeIs(403);
     }
 
     public function detailsPage(FunctionalTester $I)
@@ -33,13 +41,13 @@ class FuncManagementUserCest
         $I->see('User details');
     }
 
-    public function createUserPage(FunctionalTester $I)
+    public function createPage(FunctionalTester $I)
     {
         $I->amOnPage(route('get.manage.user.create'));
         $I->see('Create user');
     }
 
-    public function editUserPage(FunctionalTester $I)
+    public function editPage(FunctionalTester $I)
     {
         $user = factory(User::class)->create();
 
@@ -47,7 +55,7 @@ class FuncManagementUserCest
         $I->see('Edit user');
     }
 
-    public function editUserPageFail(FunctionalTester $I)
+    public function editPageFail(FunctionalTester $I)
     {
         $I->amOnPage(route('get.manage.user.edit', ['id' => 1]));
         $I->seePageNotFound();
