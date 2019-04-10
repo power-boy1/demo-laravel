@@ -1,4 +1,6 @@
-[![PHP >= 7+](https://img.shields.io/badge/php-%3E%3D%207-8892BF.svg?style=flat-square)](https://php.net/)
+## Laravel skeleton application
+
+[![PHP >= 7.1+](https://img.shields.io/badge/php-%3E%3D7.1-blue.svg)](https://php.net/)
 
 [![Build Status](https://img.shields.io/travis/ShkrutDenis/demo-laravel/master.svg?style=flat)](https://travis-ci.org/ShkrutDenis/demo-laravel?branch=master)
 
@@ -6,7 +8,9 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ShkrutDenis/demo-laravel/?branch=master)
 
-Project with basic functional:
+![GitHub](https://img.shields.io/github/license/ShkrutDenis/demo-laravel.svg?style=flat)
+
+Features:
  - authorization;
  - registration;
  - verify account by link (sending to email);
@@ -14,58 +18,52 @@ Project with basic functional:
  - simple ACL;
  - management users (CRUD).
  
-Used next packages and dependencies:
+App dependencies:
  - PHP : ^7.1.3;
- - Laravel : 5.7.*;
+ - Laravel : 5.8.*;
  - Vue : ^2.5.17;
  - Vuex : ^3.0.1;
  - Element-ui: ^2.4.11;
 
 ## Getting started
 
-Instruction how install project before using. 
+### Installation
 
-### Setup project
-
-Clone this repository to your local machine:
+Clone repository to your local machine:
 
 - git clone https://github.com/ShkrutDenis/demo-laravel.git
-
-    > If your already have repository, you can add remote 
-    
-    > ``` git remote add https://github.com/ShkrutDenis/demo-laravel.git ```
 
 - git checkout -b develop
 
 - git pull https://github.com/ShkrutDenis/demo-laravel.git develop
 
-Next step you need to setup environment. You can select any environment between `vagrant` or `docker`.
+Next step, you should setup environment. You can choose environment between `vagrant` or `docker`
 
 #### Setup environment
 
 ##### vagrant (homestead):
 
-> Project use homestead, because your need install VirtualBox v 5.*
+> Project used homestead, so first of all your need to install VirtualBox v 5.* and vagrant 2.2.*
     
-1) First you need run next bash command:
+1) Run bash command:
     ```
         bash ./provision/vagrant/init.sh
     ```
-    > Now you will must be in vagrant, your user will must be vagrant@basicFunc:~$ 
+    > After installing homestead you will be log in into VM `(vagrant ssh)` and go to project directory `(cd code)`
     
 3) Run migrations and seeders:
     ```
         php artisan migrate
         php artisan db:seed
     ```
-    > This commands and any same must be run in vagrant machine
+    > All artisan commands we have to run into VM
     
 4) Run setup super admin:
     ```
         php artisan setup:super-admin
     ```
 
-5) Now you can get access to site in your browser by next link:
+5) Now you can get access to the site. Copy and past into your browser this link:
     ```
         http://130.131.132.133
     ```
@@ -74,35 +72,35 @@ Next step you need to setup environment. You can select any environment between 
     
 ##### docker (laradock v7.8.0):
 
-1) Run next bash command:
+1) Run bash command:
     ```
         bash ./provosion/docker/docker-up-script.sh
     ```
-    > Now you must be in "workspace" docker container
+    > You will be logged in "workspace" docker container
     
 2) Change user from root to laradock:
     ```
         su - laradock
         cd /var/www/
     ``` 
-3) Now you can get access to site in your browser by next link:
+3) Now you can get access to the site. Copy and past into your browser this link:
     ```
        http://localhost
     ```
     
 ### Testing
 
-> All command must be run on virtual machine (vagrant) or inside container (docker).
+> All commands must be run on the virtual machine (vagrant) or inside container (docker).
 
-For start tests run next command:
+Run tests:
 ```
     php vendor/bin/codecept run
 ```
-For check codestyle by codesniffer run next command:
+Check code style by codesniffer
 ```
     php vendor/bin/phpcs
 ```
-For check code for copy-paste run next command:
+Check copy-paste
 ```
     php vendor/bin/phpcpd app/
 ```
