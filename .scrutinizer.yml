@@ -2,6 +2,8 @@ build:
   nodes:
     analysis:
       tests:
+        before:
+          - cp -i provision/vagrant/.env.testing.example .env.testing
         override:
           - php-scrutinizer-run
 checks:
