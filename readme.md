@@ -16,7 +16,7 @@ Features:
  - verify account by link (sending to email);
  - recovery password by link (sending to email);
  - simple ACL;
- - management users (CRUD).
+ - management users (CRUD);
  
 App dependencies:
  - PHP : ^7.1.3;
